@@ -1,138 +1,148 @@
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans);color:var(--color-text-primary);background:var(--color-background-tertiary);min-height:100vh}
-.app{display:flex;flex-direction:column;min-height:100vh}
-.topbar{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
-.logo{display:flex;align-items:center;gap:10px;font-weight:500;font-size:16px}
-.logo-icon{width:32px;height:32px;background:#185FA5;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px}
-.nav-tabs{display:flex;gap:4px}
-.nav-tab{padding:6px 14px;border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;border:none;background:transparent;color:var(--color-text-secondary);transition:all 0.15s}
-.nav-tab.active,.nav-tab:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
-.nav-tab.active{font-weight:500;color:#185FA5}
-.main{flex:1;padding:1.5rem;max-width:1100px;margin:0 auto;width:100%}
+*{box-sizing:border-box;margin:0;padding:0;font-family:var(--font-sans)}
+body{background:#f4f6f9;min-height:100vh}
+.topbar{background:#185FA5;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{color:#fff;font-size:20px;font-weight:500;display:flex;align-items:center;gap:10px}
+.logo-icon{width:38px;height:38px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.nav{display:flex;gap:4px}
+.nav-btn{padding:8px 18px;border-radius:8px;border:none;background:transparent;color:rgba(255,255,255,0.75);font-size:15px;cursor:pointer;font-weight:400;transition:0.15s}
+.nav-btn.active,.nav-btn:hover{background:rgba(255,255,255,0.15);color:#fff}
+.add-btn{padding:10px 20px;border-radius:8px;border:none;background:#fff;color:#185FA5;font-size:15px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;transition:0.15s}
+.add-btn:hover{background:#E6F1FB}
+.main{max-width:960px;margin:0 auto;padding:1.5rem}
 .page{display:none}
 .page.active{display:block}
-.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:1.5rem}
-.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;cursor:pointer;transition:0.15s}
-.metric:hover{background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary)}
-.metric-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:6px}
-.metric-val{font-size:26px;font-weight:500}
-.metric-val.blue{color:#185FA5}
-.metric-val.amber{color:#BA7517}
-.metric-val.green{color:#3B6D11}
-.metric-val.coral{color:#993C1D}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.section-title{font-size:15px;font-weight:500}
-.btn{padding:7px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:0.15s}
-.btn:hover{background:var(--color-background-secondary)}
-.btn.primary{background:#185FA5;color:#fff;border-color:#185FA5}
-.btn.primary:hover{background:#0C447C}
-.btn.danger{color:#A32D2D;border-color:var(--color-border-tertiary)}
-.btn.danger:hover{background:#FCEBEB}
-.btn.sm{padding:4px 10px;font-size:12px}
-.btn.success{color:#3B6D11;border-color:var(--color-border-tertiary)}
-.btn.success:hover{background:#EAF3DE}
-.card{background:var(--color-background-primary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);overflow:hidden}
-.apt-row{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:12px;padding:12px 16px;border-bottom:0.5px solid var(--color-border-tertiary);transition:0.15s}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.5rem}
+.stat{background:#fff;border-radius:12px;padding:1.25rem 1rem;text-align:center;border:0.5px solid #e0e0e0}
+.stat-num{font-size:36px;font-weight:500;margin-bottom:4px}
+.stat-num.blue{color:#185FA5}
+.stat-num.amber{color:#BA7517}
+.stat-num.green{color:#3B6D11}
+.stat-num.gray{color:#5F5E5A}
+.stat-label{font-size:14px;color:#888}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section-title{font-size:18px;font-weight:500;color:#1a1a1a}
+.card{background:#fff;border-radius:12px;border:0.5px solid #e0e0e0;overflow:hidden;margin-bottom:1.5rem}
+.apt-row{display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:16px;padding:16px 20px;border-bottom:0.5px solid #f0f0f0;transition:0.15s}
 .apt-row:last-child{border-bottom:none}
-.apt-row:hover{background:var(--color-background-secondary)}
-.apt-time{text-align:center}
-.apt-time-main{font-size:15px;font-weight:500;color:#185FA5}
-.apt-time-sub{font-size:11px;color:var(--color-text-secondary)}
-.apt-name{font-weight:500;font-size:14px;margin-bottom:2px}
-.apt-info{font-size:12px;color:var(--color-text-secondary)}
-.apt-actions{display:flex;gap:6px;align-items:center}
-.badge{display:inline-flex;align-items:center;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
-.badge.pending{background:#E6F1FB;color:#0C447C}
-.badge.completed{background:#EAF3DE;color:#27500A}
-.badge.cancelled{background:#FCEBEB;color:#791F1F}
-.badge.today{background:#FAEEDA;color:#633806}
-.empty{text-align:center;padding:3rem 1rem;color:var(--color-text-secondary);font-size:14px}
-.search-row{display:flex;gap:10px;margin-bottom:1rem;flex-wrap:wrap}
-.search-row input,.search-row select{flex:1;min-width:140px;font-size:13px;padding:7px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary)}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;display:flex;align-items:center;justify-content:center;padding:1rem}
-.modal{background:var(--color-background-primary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);width:100%;max-width:480px;overflow:hidden}
-.modal-header{padding:1rem 1.25rem;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between}
-.modal-title{font-size:15px;font-weight:500}
-.modal-body{padding:1.25rem;display:flex;flex-direction:column;gap:14px}
-.modal-footer{padding:1rem 1.25rem;border-top:0.5px solid var(--color-border-tertiary);display:flex;justify-content:flex-end;gap:8px}
-.field label{font-size:12px;color:var(--color-text-secondary);margin-bottom:5px;display:block}
-.field input,.field select,.field textarea{width:100%;padding:8px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:13px;font-family:inherit}
-.field textarea{resize:vertical;min-height:72px}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tab-bar{display:flex;gap:4px;margin-bottom:1rem;border-bottom:0.5px solid var(--color-border-tertiary);padding-bottom:0}
-.tab-btn{padding:8px 16px;font-size:13px;border:none;background:transparent;cursor:pointer;color:var(--color-text-secondary);border-bottom:2px solid transparent;margin-bottom:-1px;transition:0.15s}
-.tab-btn.active{color:#185FA5;border-bottom-color:#185FA5;font-weight:500}
-.today-badge{background:#185FA5;color:#fff;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;margin-left:6px}
-@media(max-width:600px){.nav-tabs{display:none}.apt-row{grid-template-columns:56px 1fr}.apt-actions{display:none}.metrics{grid-template-columns:1fr 1fr}.field-row{grid-template-columns:1fr}}
+.apt-row:hover{background:#f8fafc}
+.time-box{text-align:center}
+.time-main{font-size:22px;font-weight:500;color:#185FA5;line-height:1}
+.time-sub{font-size:12px;color:#999;margin-top:3px}
+.apt-name{font-size:17px;font-weight:500;color:#1a1a1a;margin-bottom:4px}
+.apt-detail{font-size:14px;color:#888}
+.apt-actions{display:flex;gap:8px;align-items:center}
+.badge{font-size:13px;padding:4px 12px;border-radius:20px;font-weight:500;white-space:nowrap}
+.badge.bekleyen{background:#E6F1FB;color:#0C447C}
+.badge.tamamlandi{background:#EAF3DE;color:#27500A}
+.badge.bugun{background:#FAEEDA;color:#633806}
+.action-btn{width:38px;height:38px;border-radius:8px;border:0.5px solid #e0e0e0;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:#555;transition:0.15s}
+.action-btn:hover{background:#f0f0f0}
+.action-btn.green:hover{background:#EAF3DE;color:#27500A;border-color:#c0dd97}
+.action-btn.red:hover{background:#FCEBEB;color:#791F1F;border-color:#f7c1c1}
+.empty-state{text-align:center;padding:3rem;color:#aaa}
+.empty-state i{font-size:48px;display:block;margin-bottom:12px}
+.empty-state p{font-size:16px}
+
+.search-bar{display:flex;gap:10px;margin-bottom:1rem;flex-wrap:wrap}
+.search-bar input,.search-bar select{font-size:15px;padding:10px 14px;border-radius:8px;border:0.5px solid #d0d0d0;background:#fff;color:#1a1a1a;flex:1;min-width:140px}
+
+.cust-row{display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:16px;padding:16px 20px;border-bottom:0.5px solid #f0f0f0;transition:0.15s}
+.cust-row:last-child{border-bottom:none}
+.cust-row:hover{background:#f8fafc}
+.avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;color:#fff}
+.cust-name{font-size:16px;font-weight:500;color:#1a1a1a;margin-bottom:3px}
+.cust-detail{font-size:13px;color:#888}
+.cust-apt-btn{padding:8px 16px;border-radius:8px;border:0.5px solid #185FA5;background:#E6F1FB;color:#0C447C;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap;transition:0.15s}
+.cust-apt-btn:hover{background:#185FA5;color:#fff}
+
+.overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:50;align-items:center;justify-content:center;padding:1rem}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:460px;overflow:hidden}
+.modal-top{background:#185FA5;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.modal-top h2{color:#fff;font-size:18px;font-weight:500}
+.modal-close{width:36px;height:36px;border-radius:8px;border:none;background:rgba(255,255,255,0.2);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-body{padding:1.5rem;display:flex;flex-direction:column;gap:16px}
+.field label{display:block;font-size:14px;font-weight:500;color:#555;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:11px 14px;border-radius:8px;border:0.5px solid #d0d0d0;background:#fff;color:#1a1a1a;font-size:15px;font-family:inherit}
+.field textarea{resize:vertical;min-height:80px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-foot{padding:1rem 1.5rem;border-top:0.5px solid #eee;display:flex;gap:10px;justify-content:flex-end}
+.btn-cancel{padding:10px 20px;border-radius:8px;border:0.5px solid #d0d0d0;background:#fff;color:#555;font-size:15px;cursor:pointer}
+.btn-save{padding:10px 24px;border-radius:8px;border:none;background:#185FA5;color:#fff;font-size:15px;font-weight:500;cursor:pointer}
+.btn-save:hover{background:#0C447C}
+.wrap{position:relative;min-height:600px}
 </style>
-<h2 class="sr-only">Berber randevu yönetim uygulaması — bugünün randevularını, müşteri bilgilerini ve hizmetleri yönetin.</h2>
-<div class="app">
+
+<h2 class="sr-only">BerberPro - Randevu yönetim sistemi. Bugünün randevuları, müşteri listesi ve randevu ekleme özellikleri.</h2>
+
+<div class="wrap" id="app">
 <div class="topbar">
   <div class="logo"><div class="logo-icon"><i class="ti ti-scissors" aria-hidden="true"></i></div>BerberPro</div>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showPage('dashboard')"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Panel</button>
-    <button class="nav-tab" onclick="showPage('appointments')"><i class="ti ti-calendar" aria-hidden="true"></i> Randevular</button>
-    <button class="nav-tab" onclick="showPage('customers')"><i class="ti ti-users" aria-hidden="true"></i> Müşteriler</button>
+  <div class="nav">
+    <button class="nav-btn active" onclick="goPage('panel',this)"><i class="ti ti-home" aria-hidden="true"></i> Ana Sayfa</button>
+    <button class="nav-btn" onclick="goPage('randevular',this)"><i class="ti ti-calendar" aria-hidden="true"></i> Randevular</button>
+    <button class="nav-btn" onclick="goPage('musteriler',this)"><i class="ti ti-users" aria-hidden="true"></i> Müşteriler</button>
   </div>
-  <button class="btn primary" onclick="openModal()"><i class="ti ti-plus" aria-hidden="true"></i> Yeni Randevu</button>
+  <button class="add-btn" onclick="openModal()"><i class="ti ti-plus" aria-hidden="true"></i> Yeni Randevu</button>
 </div>
+
 <div class="main">
 
-<div id="page-dashboard" class="page active">
-  <div style="margin-bottom:1.25rem">
-    <div style="font-size:22px;font-weight:500;margin-bottom:4px">Hoş geldiniz 👋</div>
-    <div style="font-size:13px;color:var(--color-text-secondary)" id="today-date"></div>
+<div id="pg-panel" class="page active">
+  <div style="margin-bottom:1.5rem">
+    <div style="font-size:24px;font-weight:500;color:#1a1a1a;margin-bottom:4px">Merhaba! 👋</div>
+    <div style="font-size:15px;color:#888" id="tarih-label"></div>
   </div>
-  <div class="metrics" id="metrics"></div>
-  <div class="section-header"><span class="section-title">Bugünün Randevuları <span class="today-badge" id="today-count-badge">0</span></span></div>
-  <div class="card" id="today-list"></div>
-  <div class="section-header" style="margin-top:1.5rem"><span class="section-title">Yaklaşan Randevular</span></div>
-  <div class="card" id="upcoming-list"></div>
+  <div class="stats" id="stats-area"></div>
+  <div class="section-head"><span class="section-title"><i class="ti ti-calendar-today" aria-hidden="true" style="color:#185FA5;margin-right:6px"></i>Bugünün Randevuları</span></div>
+  <div class="card" id="bugun-liste"></div>
+  <div class="section-head" style="margin-top:1.5rem"><span class="section-title"><i class="ti ti-clock" aria-hidden="true" style="color:#BA7517;margin-right:6px"></i>Yaklaşan Randevular</span></div>
+  <div class="card" id="yaklasan-liste"></div>
 </div>
 
-<div id="page-appointments" class="page">
-  <div class="section-header"><span class="section-title">Tüm Randevular</span></div>
-  <div class="search-row">
-    <input type="text" id="search-name" placeholder="Müşteri ara..." oninput="renderAppointments()">
-    <input type="date" id="filter-date" onchange="renderAppointments()">
-    <select id="filter-status" onchange="renderAppointments()">
+<div id="pg-randevular" class="page">
+  <div class="section-head"><span class="section-title">Tüm Randevular</span></div>
+  <div class="search-bar">
+    <input type="text" id="s-isim" placeholder="🔍  Müşteri adı ara..." oninput="renderRandevular()">
+    <input type="date" id="s-tarih" onchange="renderRandevular()">
+    <select id="s-durum" onchange="renderRandevular()">
       <option value="">Tüm Durumlar</option>
-      <option value="pending">Bekleyen</option>
-      <option value="completed">Tamamlanan</option>
-      <option value="cancelled">İptal</option>
+      <option value="bekleyen">Bekleyen</option>
+      <option value="tamamlandi">Tamamlandı</option>
     </select>
   </div>
-  <div class="card" id="apt-list"></div>
+  <div class="card" id="apt-liste"></div>
 </div>
 
-<div id="page-customers" class="page">
-  <div class="section-header"><span class="section-title">Müşteriler</span></div>
-  <div class="search-row">
-    <input type="text" id="search-customer" placeholder="Müşteri ara..." oninput="renderCustomers()">
+<div id="pg-musteriler" class="page">
+  <div class="section-head"><span class="section-title">Müşteriler</span></div>
+  <div class="search-bar">
+    <input type="text" id="s-musteri" placeholder="🔍  Müşteri ara..." oninput="renderMusteriler()">
   </div>
-  <div class="card" id="cust-list"></div>
+  <div class="card" id="cust-liste"></div>
 </div>
 
 </div>
-</div>
 
-<div class="overlay" id="modal-overlay" style="display:none" onclick="if(event.target===this)closeModal()">
-<div class="modal" role="dialog" aria-modal="true" aria-label="Randevu formu">
-  <div class="modal-header">
-    <span class="modal-title" id="modal-title">Yeni Randevu</span>
-    <button class="btn sm" onclick="closeModal()" aria-label="Kapat"><i class="ti ti-x"></i></button>
+<div class="overlay" id="modal-overlay">
+<div class="modal">
+  <div class="modal-top">
+    <h2 id="modal-baslik">Yeni Randevu Ekle</h2>
+    <button class="modal-close" onclick="closeModal()" aria-label="Kapat"><i class="ti ti-x"></i></button>
   </div>
   <div class="modal-body">
-    <div class="field"><label>Müşteri Adı *</label><input id="f-name" type="text" placeholder="Ad Soyad"></div>
-    <div class="field"><label>Telefon</label><input id="f-phone" type="tel" placeholder="05XX XXX XX XX"></div>
+    <div class="field"><label>Müşteri Adı</label><input id="f-isim" type="text" placeholder="Adı ve soyadı yaz..."></div>
+    <div class="field"><label>Telefon Numarası</label><input id="f-tel" type="tel" placeholder="05XX XXX XX XX"></div>
     <div class="field-row">
-      <div class="field"><label>Tarih *</label><input id="f-date" type="date"></div>
-      <div class="field"><label>Saat *</label><input id="f-time" type="time"></div>
+      <div class="field"><label>Tarih</label><input id="f-tarih" type="date"></div>
+      <div class="field"><label>Saat</label><input id="f-saat" type="time"></div>
     </div>
-    <div class="field"><label>Hizmet *</label>
-      <select id="f-service">
+    <div class="field"><label>Yapılacak İşlem</label>
+      <select id="f-islem">
         <option value="">Seçin...</option>
         <option>Saç Kesimi</option>
         <option>Sakal Tıraşı</option>
@@ -140,198 +150,193 @@ body{font-family:var(--font-sans);color:var(--color-text-primary);background:var
         <option>Çocuk Saç Kesimi</option>
         <option>Saç Boyama</option>
         <option>Cilt Bakımı</option>
-        <option>Fön</option>
         <option>Komple Bakım</option>
       </select>
     </div>
-    <div class="field"><label>Notlar</label><textarea id="f-notes" placeholder="Ekstra notlar..."></textarea></div>
+    <div class="field"><label>Not (İsteğe bağlı)</label><textarea id="f-not" placeholder="Örnek: Kısa kes, boyasız yap..."></textarea></div>
   </div>
-  <div class="modal-footer">
-    <button class="btn" onclick="closeModal()">İptal</button>
-    <button class="btn primary" onclick="saveAppointment()"><i class="ti ti-check"></i> Kaydet</button>
+  <div class="modal-foot">
+    <button class="btn-cancel" onclick="closeModal()">Vazgeç</button>
+    <button class="btn-save" onclick="kaydet()"><i class="ti ti-check" aria-hidden="true"></i> Kaydet</button>
   </div>
+</div>
 </div>
 </div>
 
 <script>
-let appointments = [];
-let editId = null;
-const STORAGE_KEY = 'berberpro_appointments';
+let randevular=[];let editId=null;const SK='berberpro2_data';
+const RENKLER=['#185FA5','#3B6D11','#993C1D','#BA7517','#534AB7','#0F6E56'];
 
-const SERVICES_SHORT = {'Saç Kesimi':'✂️','Sakal Tıraşı':'🪒','Saç + Sakal':'✂️🪒','Çocuk Saç Kesimi':'✂️','Saç Boyama':'🎨','Cilt Bakımı':'💆','Fön':'💨','Komple Bakım':'⭐'};
-
-function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
-
-async function load(){
-  try{const r=await window.storage.get(STORAGE_KEY);if(r)appointments=JSON.parse(r.value);}catch(e){appointments=[];}
-  if(!appointments.length)seed();
+async function yukle(){
+  try{const r=await window.storage.get(SK);if(r)randevular=JSON.parse(r.value);}catch(e){randevular=[];}
+  if(!randevular.length)ornek();
   init();
 }
+async function kaydet_storage(){try{await window.storage.set(SK,JSON.stringify(randevular));}catch(e){}}
 
-async function save(){
-  try{await window.storage.set(STORAGE_KEY,JSON.stringify(appointments));}catch(e){}
-}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
+function bugun(){return new Date().toISOString().slice(0,10)}
 
-function seed(){
-  const today=todayStr();
-  const tm=new Date();tm.setDate(tm.getDate()+1);
-  const tomorrow=tm.toISOString().slice(0,10);
-  appointments=[
-    {id:uid(),name:'Ahmet Yılmaz',phone:'0532 111 22 33',date:today,time:'09:00',service:'Saç Kesimi',notes:'Kısa kes',status:'completed'},
-    {id:uid(),name:'Mehmet Kaya',phone:'0545 222 33 44',date:today,time:'10:30',service:'Saç + Sakal',notes:'',status:'completed'},
-    {id:uid(),name:'Ali Demir',phone:'0533 333 44 55',date:today,time:'12:00',service:'Sakal Tıraşı',notes:'',status:'pending'},
-    {id:uid(),name:'Burak Şahin',phone:'0544 444 55 66',date:today,time:'14:00',service:'Saç Kesimi',notes:'Üstten kıs',status:'pending'},
-    {id:uid(),name:'Emre Arslan',phone:'0555 555 66 77',date:today,time:'16:30',service:'Komple Bakım',notes:'Düzenli müşteri',status:'pending'},
-    {id:uid(),name:'Yusuf Çelik',phone:'0506 666 77 88',date:tomorrow,time:'10:00',service:'Saç Boyama',notes:'',status:'pending'},
-    {id:uid(),name:'Hasan Aydın',phone:'0531 777 88 99',date:tomorrow,time:'11:30',service:'Saç Kesimi',notes:'',status:'pending'},
+function ornek(){
+  const b=bugun();
+  const yarin=new Date();yarin.setDate(yarin.getDate()+1);const y=yarin.toISOString().slice(0,10);
+  randevular=[
+    {id:uid(),isim:'Ahmet Yılmaz',tel:'0532 111 22 33',tarih:b,saat:'09:00',islem:'Saç Kesimi',not:'Kısa kes',durum:'tamamlandi'},
+    {id:uid(),isim:'Mehmet Kaya',tel:'0545 222 33 44',tarih:b,saat:'10:30',islem:'Saç + Sakal',not:'',durum:'tamamlandi'},
+    {id:uid(),isim:'Ali Demir',tel:'0533 333 44 55',tarih:b,saat:'12:00',islem:'Sakal Tıraşı',not:'',durum:'bekleyen'},
+    {id:uid(),isim:'Burak Şahin',tel:'0544 444 55 66',tarih:b,saat:'14:00',islem:'Saç Kesimi',not:'Üstten kıs',durum:'bekleyen'},
+    {id:uid(),isim:'Emre Arslan',tel:'0555 555 66 77',tarih:b,saat:'16:30',islem:'Komple Bakım',not:'Düzenli müşteri',durum:'bekleyen'},
+    {id:uid(),isim:'Yusuf Çelik',tel:'0506 666 77 88',tarih:y,saat:'10:00',islem:'Saç Boyama',not:'',durum:'bekleyen'},
+    {id:uid(),isim:'Hasan Aydın',tel:'0531 777 88 99',tarih:y,saat:'11:30',islem:'Saç Kesimi',not:'',durum:'bekleyen'},
   ];
-  save();
+  kaydet_storage();
 }
-
-function todayStr(){return new Date().toISOString().slice(0,10)}
 
 function init(){
-  document.getElementById('today-date').textContent=new Date().toLocaleDateString('tr-TR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  document.getElementById('f-date').value=todayStr();
-  renderAll();
+  document.getElementById('tarih-label').textContent=new Date().toLocaleDateString('tr-TR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('f-tarih').value=bugun();
+  renderHepsi();
 }
 
-function renderAll(){renderMetrics();renderToday();renderUpcoming();renderAppointments();renderCustomers();}
+function renderHepsi(){renderStats();renderBugun();renderYaklasan();renderRandevular();renderMusteriler();}
 
-function renderMetrics(){
-  const today=todayStr();
-  const todayApts=appointments.filter(a=>a.date===today);
-  const completed=appointments.filter(a=>a.status==='completed').length;
-  const pending=appointments.filter(a=>a.status==='pending'&&a.date>=today).length;
-  const upcoming=appointments.filter(a=>a.date>today).length;
-  document.getElementById('metrics').innerHTML=`
-    <div class="metric" onclick="showPage('appointments')"><div class="metric-label">Bugün</div><div class="metric-val blue">${todayApts.length}</div></div>
-    <div class="metric" onclick="showPage('appointments')"><div class="metric-label">Bekleyen</div><div class="metric-val amber">${pending}</div></div>
-    <div class="metric" onclick="showPage('appointments')"><div class="metric-label">Tamamlanan</div><div class="metric-val green">${completed}</div></div>
-    <div class="metric" onclick="showPage('appointments')"><div class="metric-label">Yaklaşan</div><div class="metric-val coral">${upcoming}</div></div>`;
+function renderStats(){
+  const b=bugun();
+  const bugunkiler=randevular.filter(r=>r.tarih===b);
+  const tamamlanan=randevular.filter(r=>r.durum==='tamamlandi').length;
+  const bekleyen=randevular.filter(r=>r.durum==='bekleyen'&&r.tarih>=b).length;
+  const yaklasan=randevular.filter(r=>r.tarih>b).length;
+  document.getElementById('stats-area').innerHTML=`
+    <div class="stat"><div class="stat-num blue">${bugunkiler.length}</div><div class="stat-label">Bugün</div></div>
+    <div class="stat"><div class="stat-num amber">${bekleyen}</div><div class="stat-label">Bekleyen</div></div>
+    <div class="stat"><div class="stat-num green">${tamamlanan}</div><div class="stat-label">Tamamlanan</div></div>
+    <div class="stat"><div class="stat-num gray">${yaklasan}</div><div class="stat-label">Yaklaşan</div></div>`;
 }
 
-function aptRow(a,showDate){
-  const svc=SERVICES_SHORT[a.service]||'';
-  const bd=a.status==='completed'?'completed':a.status==='cancelled'?'cancelled':a.date===todayStr()?'today':'pending';
-  const bl={'pending':'Bekleyen','completed':'Tamamlanan','cancelled':'İptal','today':'Bugün'}[bd];
-  const dateLabel=showDate?`<span style="margin-left:4px">${fmtDate(a.date)}</span>`:'';
+function aptSatir(r,tarihGoster){
+  const b=bugun();
+  const badgeClass=r.durum==='tamamlandi'?'tamamlandi':r.tarih===b?'bugun':'bekleyen';
+  const badgeText=r.durum==='tamamlandi'?'Tamamlandı':r.tarih===b?'Bugün':'Bekleyen';
+  const tarihStr=tarihGoster?`<div class="time-sub">${fmtTarih(r.tarih)}</div>`:'';
   return `<div class="apt-row">
-    <div class="apt-time"><div class="apt-time-main">${a.time}</div><div class="apt-time-sub">${dateLabel}</div></div>
-    <div><div class="apt-name">${esc(a.name)}</div><div class="apt-info">${svc} ${esc(a.service)}${a.phone?' · '+esc(a.phone):''}${a.notes?' · '+esc(a.notes.slice(0,30)):''}</div></div>
+    <div class="time-box"><div class="time-main">${r.saat}</div>${tarihStr}</div>
+    <div>
+      <div class="apt-name">${esc(r.isim)}</div>
+      <div class="apt-detail">${esc(r.islem)}${r.tel?' &nbsp;·&nbsp; '+esc(r.tel):''}${r.not?' &nbsp;·&nbsp; '+esc(r.not.slice(0,30)):''}</div>
+    </div>
     <div class="apt-actions">
-      <span class="badge ${bd}">${bl}</span>
-      ${a.status==='pending'?`<button class="btn sm success" onclick="markDone('${a.id}')" title="Tamamlandı"><i class="ti ti-check"></i></button>`:''}
-      <button class="btn sm" onclick="openModal('${a.id}')" title="Düzenle"><i class="ti ti-edit"></i></button>
-      <button class="btn sm danger" onclick="deleteApt('${a.id}')" title="Sil"><i class="ti ti-trash"></i></button>
+      <span class="badge ${badgeClass}">${badgeText}</span>
+      ${r.durum==='bekleyen'?`<button class="action-btn green" onclick="tamam('${r.id}')" title="Tamamlandı olarak işaretle"><i class="ti ti-check" aria-hidden="true"></i></button>`:''}
+      <button class="action-btn" onclick="openModal('${r.id}')" title="Düzenle"><i class="ti ti-edit" aria-hidden="true"></i></button>
+      <button class="action-btn red" onclick="sil('${r.id}')" title="Sil"><i class="ti ti-trash" aria-hidden="true"></i></button>
     </div>
   </div>`;
 }
 
-function fmtDate(d){return new Date(d+'T00:00:00').toLocaleDateString('tr-TR',{day:'numeric',month:'short'})}
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-
-function renderToday(){
-  const today=todayStr();
-  const list=appointments.filter(a=>a.date===today).sort((a,b)=>a.time.localeCompare(b.time));
-  document.getElementById('today-count-badge').textContent=list.length;
-  document.getElementById('today-list').innerHTML=list.length?list.map(a=>aptRow(a,false)).join(''):`<div class="empty"><i class="ti ti-calendar-off" style="font-size:28px;display:block;margin-bottom:8px"></i>Bugün randevu yok</div>`;
+function renderBugun(){
+  const b=bugun();
+  const liste=randevular.filter(r=>r.tarih===b).sort((a,c)=>a.saat.localeCompare(c.saat));
+  document.getElementById('bugun-liste').innerHTML=liste.length?liste.map(r=>aptSatir(r,false)).join(''):`<div class="empty-state"><i class="ti ti-calendar-off" aria-hidden="true"></i><p>Bugün randevu yok</p></div>`;
 }
 
-function renderUpcoming(){
-  const today=todayStr();
-  const list=appointments.filter(a=>a.date>today&&a.status==='pending').sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time)).slice(0,5);
-  document.getElementById('upcoming-list').innerHTML=list.length?list.map(a=>aptRow(a,true)).join(''):`<div class="empty"><i class="ti ti-calendar" style="font-size:28px;display:block;margin-bottom:8px"></i>Yaklaşan randevu yok</div>`;
+function renderYaklasan(){
+  const b=bugun();
+  const liste=randevular.filter(r=>r.tarih>b&&r.durum==='bekleyen').sort((a,c)=>a.tarih.localeCompare(c.tarih)||a.saat.localeCompare(c.saat)).slice(0,4);
+  document.getElementById('yaklasan-liste').innerHTML=liste.length?liste.map(r=>aptSatir(r,true)).join(''):`<div class="empty-state"><i class="ti ti-calendar" aria-hidden="true"></i><p>Yaklaşan randevu yok</p></div>`;
 }
 
-function renderAppointments(){
-  const q=(document.getElementById('search-name').value||'').toLowerCase();
-  const fd=document.getElementById('filter-date').value;
-  const fs=document.getElementById('filter-status').value;
-  let list=[...appointments];
-  if(q)list=list.filter(a=>a.name.toLowerCase().includes(q));
-  if(fd)list=list.filter(a=>a.date===fd);
-  if(fs)list=list.filter(a=>a.status===fs);
-  list.sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
-  document.getElementById('apt-list').innerHTML=list.length?list.map(a=>aptRow(a,true)).join(''):`<div class="empty"><i class="ti ti-search" style="font-size:28px;display:block;margin-bottom:8px"></i>Sonuç bulunamadı</div>`;
+function renderRandevular(){
+  const q=(document.getElementById('s-isim').value||'').toLowerCase();
+  const ft=document.getElementById('s-tarih').value;
+  const fd=document.getElementById('s-durum').value;
+  let liste=[...randevular];
+  if(q)liste=liste.filter(r=>r.isim.toLowerCase().includes(q));
+  if(ft)liste=liste.filter(r=>r.tarih===ft);
+  if(fd)liste=liste.filter(r=>r.durum===fd);
+  liste.sort((a,c)=>a.tarih.localeCompare(c.tarih)||a.saat.localeCompare(c.saat));
+  document.getElementById('apt-liste').innerHTML=liste.length?liste.map(r=>aptSatir(r,true)).join(''):`<div class="empty-state"><i class="ti ti-search" aria-hidden="true"></i><p>Sonuç bulunamadı</p></div>`;
 }
 
-function renderCustomers(){
-  const q=(document.getElementById('search-customer').value||'').toLowerCase();
+function renderMusteriler(){
+  const q=(document.getElementById('s-musteri').value||'').toLowerCase();
   const map={};
-  appointments.forEach(a=>{
-    if(q&&!a.name.toLowerCase().includes(q))return;
-    if(!map[a.name])map[a.name]={name:a.name,phone:a.phone,count:0,last:''};
-    map[a.name].count++;
-    if(a.date>map[a.name].last)map[a.name].last=a.date;
+  randevular.forEach(r=>{
+    if(q&&!r.isim.toLowerCase().includes(q))return;
+    if(!map[r.isim])map[r.isim]={isim:r.isim,tel:r.tel,sayi:0,son:''};
+    map[r.isim].sayi++;
+    if(r.tarih>map[r.isim].son)map[r.isim].son=r.tarih;
   });
-  const custs=Object.values(map).sort((a,b)=>a.name.localeCompare(b.name,'tr'));
-  const initials=n=>n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  const colors=['#185FA5','#3B6D11','#993C1D','#BA7517','#3C3489','#0F6E56'];
-  document.getElementById('cust-list').innerHTML=custs.length?custs.map((c,i)=>`
-    <div class="apt-row" style="grid-template-columns:44px 1fr auto">
-      <div style="width:40px;height:40px;border-radius:50%;background:${colors[i%colors.length]};display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:500">${initials(c.name)}</div>
-      <div><div class="apt-name">${esc(c.name)}</div><div class="apt-info">${c.phone?esc(c.phone)+' · ':''} ${c.count} randevu · Son: ${c.last?fmtDate(c.last):'—'}</div></div>
-      <button class="btn sm primary" onclick="newAptFor('${esc(c.name)}','${esc(c.phone)}')"><i class="ti ti-plus"></i> Randevu</button>
-    </div>`).join(''):`<div class="empty"><i class="ti ti-users" style="font-size:28px;display:block;margin-bottom:8px"></i>Müşteri bulunamadı</div>`;
+  const liste=Object.values(map).sort((a,c)=>a.isim.localeCompare(c.isim,'tr'));
+  const init=n=>n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  document.getElementById('cust-liste').innerHTML=liste.length?liste.map((c,i)=>`
+    <div class="cust-row">
+      <div class="avatar" style="background:${RENKLER[i%RENKLER.length]}">${init(c.isim)}</div>
+      <div>
+        <div class="cust-name">${esc(c.isim)}</div>
+        <div class="cust-detail">${c.tel?esc(c.tel)+' &nbsp;·&nbsp; ':''} ${c.sayi} randevu &nbsp;·&nbsp; Son: ${c.son?fmtTarih(c.son):'—'}</div>
+      </div>
+      <button class="cust-apt-btn" onclick="yeniRandevuIcin('${esc(c.isim)}','${esc(c.tel)}')"><i class="ti ti-plus" aria-hidden="true"></i> Randevu</button>
+    </div>`).join(''):`<div class="empty-state"><i class="ti ti-users" aria-hidden="true"></i><p>Müşteri bulunamadı</p></div>`;
 }
 
-function showPage(id){
+function fmtTarih(d){return new Date(d+'T00:00:00').toLocaleDateString('tr-TR',{day:'numeric',month:'long'})}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function goPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  const map={dashboard:0,appointments:1,customers:2};
-  document.querySelectorAll('.nav-tab')[map[id]]?.classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pg-'+id).classList.add('active');
+  btn.classList.add('active');
 }
 
 function openModal(id){
   editId=id||null;
-  const a=id?appointments.find(x=>x.id===id):null;
-  document.getElementById('modal-title').textContent=id?'Randevuyu Düzenle':'Yeni Randevu';
-  document.getElementById('f-name').value=a?a.name:'';
-  document.getElementById('f-phone').value=a?a.phone:'';
-  document.getElementById('f-date').value=a?a.date:todayStr();
-  document.getElementById('f-time').value=a?a.time:'';
-  document.getElementById('f-service').value=a?a.service:'';
-  document.getElementById('f-notes').value=a?a.notes:'';
-  document.getElementById('modal-overlay').style.display='flex';
+  const r=id?randevular.find(x=>x.id===id):null;
+  document.getElementById('modal-baslik').textContent=id?'Randevuyu Düzenle':'Yeni Randevu Ekle';
+  document.getElementById('f-isim').value=r?r.isim:'';
+  document.getElementById('f-tel').value=r?r.tel:'';
+  document.getElementById('f-tarih').value=r?r.tarih:bugun();
+  document.getElementById('f-saat').value=r?r.saat:'';
+  document.getElementById('f-islem').value=r?r.islem:'';
+  document.getElementById('f-not').value=r?r.not:'';
+  document.getElementById('modal-overlay').classList.add('open');
 }
 
-function newAptFor(name,phone){
+function yeniRandevuIcin(isim,tel){
   openModal();
-  document.getElementById('f-name').value=name;
-  document.getElementById('f-phone').value=phone;
+  document.getElementById('f-isim').value=isim;
+  document.getElementById('f-tel').value=tel;
 }
 
-function closeModal(){document.getElementById('modal-overlay').style.display='none';editId=null;}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');editId=null;}
 
-function saveAppointment(){
-  const name=document.getElementById('f-name').value.trim();
-  const date=document.getElementById('f-date').value;
-  const time=document.getElementById('f-time').value;
-  const service=document.getElementById('f-service').value;
-  if(!name||!date||!time||!service){alert('Lütfen zorunlu alanları doldurun.');return;}
-  const data={name,phone:document.getElementById('f-phone').value.trim(),date,time,service,notes:document.getElementById('f-notes').value.trim()};
+function kaydet(){
+  const isim=document.getElementById('f-isim').value.trim();
+  const tarih=document.getElementById('f-tarih').value;
+  const saat=document.getElementById('f-saat').value;
+  const islem=document.getElementById('f-islem').value;
+  if(!isim||!tarih||!saat||!islem){alert('Lütfen adı, tarihi, saati ve işlemi doldurun!');return;}
+  const data={isim,tel:document.getElementById('f-tel').value.trim(),tarih,saat,islem,not:document.getElementById('f-not').value.trim()};
   if(editId){
-    const i=appointments.findIndex(a=>a.id===editId);
-    appointments[i]={...appointments[i],...data};
+    const i=randevular.findIndex(r=>r.id===editId);
+    randevular[i]={...randevular[i],...data};
   } else {
-    appointments.push({id:uid(),...data,status:'pending'});
+    randevular.push({id:uid(),...data,durum:'bekleyen'});
   }
-  save();closeModal();renderAll();
+  kaydet_storage();closeModal();renderHepsi();
 }
 
-function markDone(id){
-  const a=appointments.find(x=>x.id===id);
-  if(a)a.status='completed';
-  save();renderAll();
+function tamam(id){
+  const r=randevular.find(x=>x.id===id);
+  if(r)r.durum='tamamlandi';
+  kaydet_storage();renderHepsi();
 }
 
-function deleteApt(id){
-  if(!confirm('Bu randevuyu silmek istiyor musunuz?'))return;
-  appointments=appointments.filter(a=>a.id!==id);
-  save();renderAll();
+function sil(id){
+  if(!confirm('Bu randevuyu silmek istediğinizden emin misiniz?'))return;
+  randevular=randevular.filter(r=>r.id!==id);
+  kaydet_storage();renderHepsi();
 }
 
-load();
+yukle();
 </script>
